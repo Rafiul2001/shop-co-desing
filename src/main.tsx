@@ -5,11 +5,15 @@ import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import Home from './pages/Home.tsx'
 import LoginPage from './pages/LoginPage.tsx'
+import { ProductContextProvider } from './contexts/ProductContext.tsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    Component: App,
+    element:
+      <ProductContextProvider>
+        <App />
+      </ProductContextProvider>,
     children: [
       {
         index: true,
