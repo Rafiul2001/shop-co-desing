@@ -1,25 +1,8 @@
 import React from "react";
 import { Rating } from "../molecules/Rating";
+import type { TProductCardProps } from "../types/productType";
 
-interface IReview {
-    rating: number;
-    comment: string;
-    date: string;
-    reviewerName: string;
-    reviewerEmail: string;
-}
-
-interface ProductCardProps {
-    image: string;
-    title: string;
-    price: string | number;
-    rating: number;
-    reviews: IReview[]
-    description?: string;
-    onAddToCart?: () => void;
-}
-
-const ProductCard: React.FC<ProductCardProps> = ({
+const ProductCard: React.FC<TProductCardProps> = ({
     image,
     title,
     price,
