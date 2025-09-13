@@ -1,5 +1,6 @@
 import React from "react";
 import { IoMdClose } from "react-icons/io";
+import { Link } from "react-router";
 
 type TSideBarProps = {
     open: boolean
@@ -28,7 +29,9 @@ const Sidebar: React.FC<TSideBarProps> = ({ open, setOpen }) => {
                 aria-label="Sidebar"
             >
                 <div className="flex justify-between items-center px-6 py-4 border-b">
-                    <span className="text-lg font-semibold">Sidebar</span>
+                    <Link to="/" onClick={()=> setOpen(false)}>
+                        <img src="SHOP.CO Icon.png" alt="icon" />
+                    </Link>
                     <button
                         onClick={() => setOpen(false)}
                         aria-label="Close sidebar"
