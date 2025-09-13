@@ -27,11 +27,15 @@ const App: React.FC = () => {
 
   return (
     <div className="flex flex-col h-screen">
-      <Header />
-      <div className="flex-1">
+      <div className="flex-1 max-h-fit">
+        <Header />
+      </div>
+      <div className="flex-1 bg-gradient-to-tr from-gray-100 to-gray-200">
         <Outlet />
       </div>
-      <Footer />
+      <div className="flex-1 max-h-fit">
+        <Footer />
+      </div>
     </div>
   )
 }

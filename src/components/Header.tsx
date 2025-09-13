@@ -2,11 +2,17 @@ import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Link } from "react-router";
+import Sidebar from "./SideBar";
+import { useProductContext } from "../contexts/ProductContext";
 
 const Header: React.FC = () => {
+    const { searchText, setSearchText } = useProductContext()
+
     const [dropDownVisible, setDropDownVisible] = useState<boolean>(false)
     const userIconRef = useRef<HTMLImageElement>(null)
     const dropDownRef = useRef<HTMLUListElement>(null)
+
+    const [open, setOpen] = useState<boolean>(false)
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -40,10 +46,12 @@ const Header: React.FC = () => {
                     <li>New Arrivals</li>
                     <li>Brands</li>
                 </ul>
-                <div className="hidden lg:flex items-center gap-3 py-3 px-4 max-w-xl w-full rounded-[62px] bg-[#F0F0F0]">
+                {/* Search Bar */}
+                <form className="hidden lg:flex items-center gap-3 py-3 px-4 max-w-xl w-full rounded-[62px] bg-[#F0F0F0]">
                     <img src="search-icon.svg" alt="search-icon" />
-                    <input className="flex-1 border-0 outline-0" type="search" name="search-products" id="search-products" placeholder="Search for products" />
-                </div>
+                    <input className="flex-1 border-0 outline-0" type="search" name="search-products" id="search-products" placeholder="Search for products" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+                </form>
+                {/* Search Bar */}
                 <div className="flex items-center gap-3">
                     <img src="cartIcon.svg" alt="cartIcon" />
                     <div className="relative">
@@ -65,9 +73,10 @@ const Header: React.FC = () => {
                             <li className="cursor-pointer">Register</li>
                         </ul>
                     </div>
-                    <BsThreeDotsVertical className="xl:hidden" size={24} />
+                    <BsThreeDotsVertical onClick={() => setOpen(true)} className="xl:hidden" size={24} />
                 </div>
             </div>
+            <Sidebar open={open} setOpen={setOpen} />
         </div>
     )
 }
