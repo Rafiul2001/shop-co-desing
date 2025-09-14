@@ -1,9 +1,11 @@
-import ProductList from "../components/ProductList"
+// import ProductList from "../components/ProductList"
+import ProductList2 from "../components/ProductList2"
 
 const Home: React.FC = () => {
     return (
         <div>
-            <ProductList />
+            {/* <ProductList /> */}
+            <ProductList2 />
         </div>
     )
 }

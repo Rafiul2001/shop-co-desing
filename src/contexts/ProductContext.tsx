@@ -28,9 +28,18 @@ export const ProductContextProvider: React.FC<PropsWithChildren> = ({ children }
     const [searchText, setSearchText] = useState<string>("")
 
     useEffect(() => {
-        const filteredProducts = products.filter((pd) => pd.title.toLowerCase().includes(searchText.toLowerCase()))
-        if (searchText) setFilteredProducts(filteredProducts)
-    }, [searchText])
+        let filtered = products.filter((pd) =>
+            pd.title.toLowerCase().includes(searchText.toLowerCase())
+        );
+        // If no results found by title, search by description
+        if (searchText && filtered.length === 0) {
+            filtered = products.filter((pd) =>
+                pd.description.toLowerCase().includes(searchText.toLowerCase())
+            );
+        }
+        if (searchText) setFilteredProducts(filtered);
+        else setFilteredProducts([]);
+    }, [searchText, products]);
 
     return (
         <ProductContext.Provider value={{ products, setProducts, loading, setLoading, filteredProducts, searchText, setSearchText }}>
