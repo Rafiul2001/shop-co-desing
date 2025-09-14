@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useProductContext } from '../contexts/ProductContext';
 import ProductCard from './ProductCard';
 
@@ -26,9 +26,6 @@ const ProductList2: React.FC = () => {
     const [sortType, setSortType] = useState<TSortType>("alpha-asc");
     const [catDropdownOpen, setCatDropdownOpen] = useState(false);
     const pageSize = 8;
-
-    // Ref for scrolling to top of products
-    const topRef = useRef<HTMLDivElement>(null);
 
     // Get all unique categories
     const category = new Set(products.map((pd) => pd.category));
@@ -82,19 +79,8 @@ const ProductList2: React.FC = () => {
     const totalPages = Math.ceil(filteredToShow.length / pageSize);
     const paginatedProducts = filteredToShow.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
-    // Scroll to top of products when currentPage changes
-    useEffect(() => {
-        if (topRef.current) {
-            topRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    }, [currentPage]);
-
-    // Also scroll to top when filter/search/sort changes
     useEffect(() => {
         setCurrentPage(1); // Reset to first page on filter or search change
-        if (topRef.current) {
-            topRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
     }, [filter, searchText, sortType]);
 
     if (loading) {
@@ -180,7 +166,7 @@ const ProductList2: React.FC = () => {
                 {/* Product List + Sort + Pagination */}
                 <div className='lg:flex-auto w-full'>
                     {/* Sort Button */}
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 sm:mb-4 gap-2" ref={topRef}>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 sm:mb-4 gap-2">
                         <span className="text-base sm:text-lg font-semibold">Products</span>
                         <div>
                             <label htmlFor="sort-products" className="mr-2 font-medium text-sm sm:text-base">Sort By:</label>
