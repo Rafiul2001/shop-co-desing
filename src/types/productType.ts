@@ -9,11 +9,35 @@ export type TReview = {
 export type TProduct = {
     id: number;
     title: string;
-    price: number;
-    rating: number;
-    reviews: TReview[];
     description: string;
+    category: string;
+    price: number;
+    discountedPercentange: number;
+    rating: number;
+    stock: number;
+    tags: string[];
+    brand: string;
+    sku: string;
+    weight: number;
+    dimensions: {
+        width: number;
+        height: number;
+        depth: number;
+    };
+    warrantyInformation: string;
+    shippingInformation: string;
+    availabilityStatus: string;
+    reviews: TReview[];
+    returnPolicy: string;
+    minimumOrderQuantity: number;
+    meta: {
+        createdAt: string;
+        updatedAt: string;
+        barcode: string;
+        qrCode: string;
+    };
     images: string[];
+    thumbnail: string;
 }
 
 export type TProductCardProps = {

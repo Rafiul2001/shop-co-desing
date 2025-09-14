@@ -1,28 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import ProductCard from "./ProductCard";
-import axios from "axios";
-import type { TProduct } from "../types/productType";
 import { useProductContext } from "../contexts/ProductContext";
 
 const ProductList: React.FC = () => {
-    const { products, setProducts, loading, setLoading, searchText, setSearchText, filteredProducts } = useProductContext();
+    const { products, loading, searchText, setSearchText, filteredProducts } = useProductContext();
     const [visibleCount, setVisibleCount] = useState(8); // show 8 products initially
-
-    const getAllProducts = useCallback(async () => {
-        try {
-            setLoading(true);
-            const response = await axios("https://dummyjson.com/products");
-            setProducts(response.data.products as TProduct[]);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    }, [setProducts, setLoading]);
-
-    useEffect(() => {
-        getAllProducts();
-    }, [getAllProducts]);
 
     if (loading) {
         return (

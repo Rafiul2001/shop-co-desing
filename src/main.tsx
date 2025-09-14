@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router'
 import Home from './pages/Home.tsx'
 import LoginPage from './pages/LoginPage.tsx'
 import { ProductContextProvider } from './contexts/ProductContext.tsx'
+import ViewProduct from './pages/ViewProduct.tsx'
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,16 @@ const router = createBrowserRouter([
       {
         path: "login",
         Component: LoginPage
+      },
+      {
+        path: "products/:productId",
+        Component: ViewProduct
+      },
+      {
+        path: "*",
+        element: <div className='max-w-7xl h-full mx-auto py-5 text-3xl flex flex-row items-center justify-center'>
+          <h1 className='text-rose-500'>ERROR 404! Not found</h1>
+        </div>
       }
     ]
   }

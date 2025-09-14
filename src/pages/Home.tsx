@@ -1,6 +1,6 @@
 import ProductList from "../components/ProductList"
 
-const Home = () => {
+const Home: React.FC = () => {
     return (
         <div>
             <ProductList />
